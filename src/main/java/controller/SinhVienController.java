@@ -25,6 +25,10 @@ public class SinhVienController extends HttpServlet {
         String uri = req.getRequestURI();
         if(uri.contains("hien-thi")){
             hienThi(req, resp);
+        } else if(uri.contains("view-update")){
+            viewUpdate(req, resp);
+        } else if(uri.contains("xoa")){
+            xoa(req, resp);
         }
     }
 
@@ -39,6 +43,12 @@ public class SinhVienController extends HttpServlet {
         req.getRequestDispatcher("/buoi1/hien-thi.jsp").forward(req, resp);
     }
 
+    private void xoa(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        Integer id = Integer.valueOf(req.getParameter("id"));
+        sinhVienRepository.deleteSinhVien(id);
+        resp.sendRedirect("/sinh-vien/hien-thi");
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String uri = req.getRequestURI();
@@ -46,15 +56,7 @@ public class SinhVienController extends HttpServlet {
             themSinhVien(req, resp);
         } else if(uri.contains("sua")){
             suaSinhVien(req, resp);
-        } else if(uri.contains("xoa")){
-            xoa(req, resp);
         }
-    }
-
-    private void xoa(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        Integer id = Integer.valueOf(req.getParameter("id"));
-        sinhVienRepository.deleteSinhVien(id);
-        resp.sendRedirect("/sinh-vien/hien-thi");
     }
 
     private void suaSinhVien(HttpServletRequest req, HttpServletResponse resp) throws IOException {

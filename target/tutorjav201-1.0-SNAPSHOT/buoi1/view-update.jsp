@@ -12,13 +12,13 @@
 </head>
 <body>
 Sua sinh vien:
-<form action="/sinh-vien/view-update" method="post">
+<form action="/sinh-vien/sua" method="post">
     ID: <input type="text" name="id" value="${sv.id}"> <br>
     Ten: <input type="text" name="ten" value="${sv.ten}"> <br>
     Tuoi: <input type="text" name="tuoi" value="${sv.tuoi}"> <br>
     Gioi tinh:
-    Nam <input type="radio" name="gioiTinh" value="true" ${sv.gioiTinh == true ? "checked":""}>
-    Nu <input type="radio" name="gioiTinh" value="false" ${sv.gioiTinh == false ? "checked":""}>
+    <input type="radio" name="gioiTinh" value="true" ${sv.gioiTinh == true ? "checked":""}> Nam
+    <input type="radio" name="gioiTinh" value="false" ${sv.gioiTinh == false ? "checked":""}> Nu
     <br>
     <button>Update</button>
 </form>

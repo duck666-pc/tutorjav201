@@ -17,8 +17,8 @@
         Ten: <input type="text" name="ten"> <br>
         Tuoi: <input type="text" name="tuoi"> <br>
         Gioi tinh:
-            Nam <input type="radio" name="gioiTinh" value="true">
-            Nu <input type="radio" name="gioiTinh" value="false">
+            <input type="radio" name="gioiTinh" value="true"> Nam
+            <input type="radio" name="gioiTinh" value="false"> Nu
         <br>
         <button>Save</button>
     </form>
