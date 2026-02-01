@@ -1,4 +1,4 @@
-package model;
+package buoi1.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -1,0 +1,56 @@
+package buoi1.repository;
+
+import buoi1.model.SinhVien;
+import org.hibernate.Session;
+import buoi1.util.HibernateConfig;
+
+import java.util.List;
+
+public class SinhVienRepository {
+    private Session session = null;
+
+    public SinhVienRepository() {
+        session = HibernateConfig.getFACTORY().openSession();
+    }
+
+    public List<SinhVien> getAll() {
+        return session.createQuery("SELECT sv FROM SinhVien sv").list();
+    }
+
+    public SinhVien getById(Integer id){
+        return session.find(SinhVien.class, id);
+    }
+
+    public void addSinhVien(SinhVien sinhVien) {
+        try {
+            session.getTransaction().begin();
+            session.save(sinhVien);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+    }
+
+    public void updateSinhVien(SinhVien sinhVien) {
+        try {
+            session.getTransaction().begin();
+            session.merge(sinhVien);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteSinhVien(Integer id) {
+        try {
+            session.getTransaction().begin();
+            session.delete(this.getById(id));
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+    }
+}

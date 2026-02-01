@@ -1,12 +1,12 @@
-package controller;
+package buoi1.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.SinhVien;
-import repository.SinhVienRepository;
+import buoi1.model.SinhVien;
+import buoi1.repository.SinhVienRepository;
 
 import java.io.IOException;
 
@@ -65,7 +65,7 @@ public class SinhVienController extends HttpServlet {
         Integer tuoi = Integer.valueOf(req.getParameter("tuoi"));
         Boolean gioiTinh = Boolean.valueOf(req.getParameter("gioiTinh"));
 
-        SinhVien sinhVien = new SinhVien(null, ten, tuoi, gioiTinh);
+        SinhVien sinhVien = new SinhVien(id, ten, tuoi, gioiTinh);
         sinhVienRepository.updateSinhVien(sinhVien);
 
         resp.sendRedirect("/sinh-vien/hien-thi");

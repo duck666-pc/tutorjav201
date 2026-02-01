@@ -1,6 +1,7 @@
-package util;
+package buoi3.Util;
 
-import model.SinhVien;
+import buoi3.Model.DonHang;
+import buoi3.Model.SanPham;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -8,7 +9,7 @@ import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 import java.util.Properties;
 
-public class HibernateConfig {
+public class HibernateConfigBuoi3 {
     private static final SessionFactory FACTORY;
 
     static {
@@ -22,7 +23,8 @@ public class HibernateConfig {
         properties.put(Environment.PASS, "123456");
         properties.put(Environment.SHOW_SQL, "true");
 
-        conf.addAnnotatedClass(SinhVien.class);
+        conf.addAnnotatedClass(DonHang.class);
+        conf.addAnnotatedClass(SanPham.class);
 
         conf.setProperties(properties);
         ServiceRegistry registry = new StandardServiceRegistryBuilder()

@@ -1,30 +1,31 @@
-package repository;
+package buoi3.Repository;
 
-import model.SinhVien;
+import buoi1.model.SinhVien;
+import buoi3.Model.DonHang;
+import buoi3.Util.HibernateConfigBuoi3;
 import org.hibernate.Session;
-import util.HibernateConfig;
 
 import java.util.List;
 
-public class SinhVienRepository {
+public class DonHangRepository {
     private Session session = null;
 
-    public SinhVienRepository() {
-        session = HibernateConfig.getFACTORY().openSession();
+    public DonHangRepository() {
+        session = HibernateConfigBuoi3.getFACTORY().openSession();
     }
 
-    public List<SinhVien> getAll() {
-        return session.createQuery("SELECT sv FROM SinhVien sv").list();
+    public List<DonHang> getAll() {
+        return session.createQuery("SELECT dh FROM DonHang dh").list();
     }
 
-    public SinhVien getById(Integer id){
-        return session.find(SinhVien.class, id);
+    public DonHang getById(Integer id){
+        return session.find(DonHang.class, id);
     }
 
-    public void addSinhVien(SinhVien sinhVien) {
+    public void addDonHang(DonHang donHang) {
         try {
             session.getTransaction().begin();
-            session.save(sinhVien);
+            session.save(donHang);
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
@@ -32,10 +33,10 @@ public class SinhVienRepository {
         }
     }
 
-    public void updateSinhVien(SinhVien sinhVien) {
+    public void updateDonHang(DonHang donHang) {
         try {
             session.getTransaction().begin();
-            session.merge(sinhVien);
+            session.merge(donHang);
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
@@ -43,7 +44,7 @@ public class SinhVienRepository {
         }
     }
 
-    public void deleteSinhVien(Integer id) {
+    public void deleteDonHang(Integer id) {
         try {
             session.getTransaction().begin();
             session.delete(this.getById(id));
