@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -28,7 +29,7 @@ public class DonHang {
     @Column(name = "da_thanh_toan")
     private Boolean daThanhToan;
 
-    @OneToMany
-    @JoinColumn(name = "id_san_pham", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "id_san_pham")
     private SanPham sanPham;
 }

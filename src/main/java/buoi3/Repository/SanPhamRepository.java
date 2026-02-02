@@ -1,7 +1,7 @@
 package buoi3.Repository;
 
 import buoi3.Model.SanPham;
-import buoi1.util.HibernateConfig;
+import buoi3.Util.HibernateConfigBuoi3;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -10,11 +10,11 @@ public class SanPhamRepository {
     private Session session = null;
 
     public SanPhamRepository() {
-        session = HibernateConfig.getFACTORY().openSession();
+        session = HibernateConfigBuoi3.getFACTORY().openSession();  // Sửa lại đây
     }
 
     public List<SanPham> getAll() {
-        return session.createQuery("SELECT sp FROM SanPham sp").list();
+        return session.createQuery("SELECT sp FROM SanPham sp").getResultList();
     }
 
     public SanPham getById(Integer id){
@@ -24,7 +24,7 @@ public class SanPhamRepository {
     public void addSanPham(SanPham sanPham) {
         try {
             session.getTransaction().begin();
-            session.save(sanPham);
+            session.persist(sanPham);
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
@@ -46,7 +46,10 @@ public class SanPhamRepository {
     public void deleteSanPham(Integer id) {
         try {
             session.getTransaction().begin();
-            session.delete(this.getById(id));
+            SanPham sp = session.find(SanPham.class, id);
+            if (sp != null) {
+                session.remove(sp);
+            }
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();

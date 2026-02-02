@@ -1,6 +1,5 @@
 package buoi3.Repository;
 
-import buoi1.model.SinhVien;
 import buoi3.Model.DonHang;
 import buoi3.Util.HibernateConfigBuoi3;
 import org.hibernate.Session;
@@ -15,7 +14,7 @@ public class DonHangRepository {
     }
 
     public List<DonHang> getAll() {
-        return session.createQuery("SELECT dh FROM DonHang dh").list();
+        return session.createQuery("SELECT dh FROM DonHang dh").getResultList();
     }
 
     public DonHang getById(Integer id){
@@ -25,7 +24,7 @@ public class DonHangRepository {
     public void addDonHang(DonHang donHang) {
         try {
             session.getTransaction().begin();
-            session.save(donHang);
+            session.persist(donHang);
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
@@ -47,7 +46,10 @@ public class DonHangRepository {
     public void deleteDonHang(Integer id) {
         try {
             session.getTransaction().begin();
-            session.delete(this.getById(id));
+            DonHang dh = session.find(DonHang.class, id);
+            if (dh != null) {
+                session.remove(dh);
+            }
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
